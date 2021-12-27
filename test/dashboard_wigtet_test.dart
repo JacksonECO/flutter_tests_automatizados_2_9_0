@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Should display the main image whe the DashBoard is opened',
-      (WidgetTester tester) async {
+  testWidgets('Should display the main image whe the DashBoard is opened', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Dashboard(),
@@ -24,13 +23,41 @@ void main() {
         ),
       );
 
-      final iconTransferFeatureItem =
-          find.widgetWithIcon(FeatureItem, Icons.monetization_on);
-      expect(iconTransferFeatureItem, findsOneWidget);
+      // final iconTransferFeatureItem = find.widgetWithIcon(FeatureItem, Icons.monetization_on);
+      // expect(iconTransferFeatureItem, findsOneWidget);
 
-      final nameTransferFeatureItem =
-          find.widgetWithText(FeatureItem, 'Transfer');
-      expect(nameTransferFeatureItem, findsOneWidget);
+      // final nameTransferFeatureItem = find.widgetWithText(FeatureItem, 'Transfer');
+      // expect(nameTransferFeatureItem, findsOneWidget);
+
+      expect(featureItemMatcher('Transfer', Icons.monetization_on), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'Should display the transaction feed feature when the Dashboard is opened',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Dashboard(),
+        ),
+      );
+
+      // final iconTransactionFeedFeatureItem = find.widgetWithIcon(FeatureItem, Icons.description);
+      // expect(iconTransactionFeedFeatureItem, findsOneWidget);
+
+      // final nameTransactionFeedFeatureItem = find.widgetWithText(FeatureItem, 'Transaction Feed');
+      // expect(nameTransactionFeedFeatureItem, findsOneWidget);
+
+      expect(featureItemMatcher('Transaction Feed', Icons.description), findsOneWidget);
+    },
+  );
+}
+
+Finder featureItemMatcher(String text, IconData icon) {
+  return find.byWidgetPredicate((widget) {
+    if (widget is FeatureItem) {
+      return widget.name == text && widget.icon == icon;
+    }
+    return false;
+  });
 }
