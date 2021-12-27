@@ -16,7 +16,7 @@ void main() {
   });
 
   testWidgets(
-    'Should display the first feature when the Dashboard is opened',
+    'Should display the transfer feature when the Dashboard is opened',
     (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -24,8 +24,13 @@ void main() {
         ),
       );
 
-      final firstFeature = find.byType(FeatureItem);
-      expect(firstFeature, findsWidgets);
+      final iconTransferFeatureItem =
+          find.widgetWithIcon(FeatureItem, Icons.monetization_on);
+      expect(iconTransferFeatureItem, findsOneWidget);
+
+      final nameTransferFeatureItem =
+          find.widgetWithText(FeatureItem, 'Transfer');
+      expect(nameTransferFeatureItem, findsOneWidget);
     },
   );
 }
