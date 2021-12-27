@@ -8,4 +8,21 @@ final Client client = InterceptedClient.build(
   requestTimeout: Duration(seconds: 5),
 );
 
-const String baseUrl = 'http://192.168.3.4:8080/transactions';
+
+
+Uri baseUrl = Uri.http('192.168.3.4:8080','transactions');
+
+//TODO: Altere para o seu Ip local
+/*
+Modelo:
+  Uri baseUrl = Uri.http('your_ip:8080','transactions');
+
+
+Para descobrir basta rodar o seguinte comando no terminal: `ipconfig`
+
+No meu caso é o valor atribuído ao Endereço IPv4:
+
+Adaptador de Rede sem Fio Wi-Fi:
+   Endereço IPv4. . . . . . . .  . . . . . . . : 192.168.3.4
+
+*/
