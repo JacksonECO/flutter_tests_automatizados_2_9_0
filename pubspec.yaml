@@ -32,6 +32,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Para testes de imagens que estão na Web utilizar o seguinte pacote;
+  # Obs: É um comportamento padrão em testes de widget evita comunicações externas
+  # Para consultas https://iiro.dev/image-network-widget-tests/
+  image_test_utils: ^1.0.0
+
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
