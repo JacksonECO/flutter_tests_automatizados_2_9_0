@@ -31,11 +31,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito:
 
-  # Para testes de imagens que estão na Web utilizar o seguinte pacote;
+
+  #? Para testes de imagens que estão na Web utilizar o seguinte pacote;
   # Obs: É um comportamento padrão em testes de widget evita comunicações externas
   # Para consultas https://iiro.dev/image-network-widget-tests/
-  image_test_utils: ^1.0.0
+  #* image_test_utils: ^1.0.0
 
 
 

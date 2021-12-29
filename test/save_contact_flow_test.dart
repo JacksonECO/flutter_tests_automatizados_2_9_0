@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'matchers.dart';
+import 'mocks.dart';
 
 void main() {
   testWidgets('Should save a contact', (WidgetTester tester) async {
-    await tester.pumpWidget(BytebankApp());
+    await tester.pumpWidget(BytebankApp(contactDao: MockContactDao()));
 
     final dashboard = find.byType(Dashboard);
     expect(dashboard, findsOneWidget);
@@ -18,21 +19,16 @@ void main() {
     expect(transferFeatureItem, findsOneWidget);
 
     await tester.tap(transferFeatureItem);
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    final contactsListt = find.byType(ContactsList);
-    expect(contactsListt, findsOneWidget);
+    final contactsList = find.byType(ContactsList);
+    expect(contactsList, findsOneWidget);
 
     final fabNewContact = find.widgetWithIcon(FloatingActionButton, Icons.add);
     expect(fabNewContact, findsOneWidget);
 
     await tester.tap(fabNewContact);
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
-
-    /// Apresenta problemas :(
+    await tester.pumpAndSettle();
 
     final contactForm = find.byType(ContactForm);
     expect(contactForm, findsOneWidget);
