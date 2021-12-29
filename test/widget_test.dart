@@ -9,7 +9,7 @@ import 'package:bytebank/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
+// void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
   //   await tester.pumpWidget(BytebankApp());
@@ -25,5 +25,16 @@ void main() {
   //   // Verify that our counter has incremented.
   //   expect(find.text('0'), findsNothing);
   //   expect(find.text('1'), findsOneWidget);
+  // });
+// }
+
+void main() {
+  // group('When Dashboard is opened', () {
+  //   testWidgets('Should display the main image', (WidgetTester tester) async {});
+  //   //test code
+  //   testWidgets('Should display the transfer feature', (tester) async {});
+  //   //test code
+  //   testWidgets('Should display the transaction feed feature', (tester) async {});
+  //   //test code
   // });
 }
