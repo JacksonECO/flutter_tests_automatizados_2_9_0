@@ -1,8 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bytebank/components/response_dialog.dart';
 import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/main.dart';
 import 'package:bytebank/models/contact.dart';
+import 'package:bytebank/models/transaction.dart';
 import 'package:bytebank/screens/contacts_list.dart';
 import 'package:bytebank/screens/dashboard.dart';
 import 'package:bytebank/screens/transaction_form.dart';
@@ -15,17 +17,21 @@ import '../helps/mocks.dart';
 
 main() {
   testWidgets('Should transfer to contact', (tester) async {
+    var contact2 = Contact(0, 'Alex', 1000);
+
     final MockContactDao mockContactDao = MockContactDao();
-    when(mockContactDao.findAll()).thenAnswer((realInvocation) async => [Contact(0, 'Alex', 1000)]);
+    when(mockContactDao.findAll()).thenAnswer((realInvocation) async {
+      return [contact2];
+    });
 
     final MockTransactionWebClient mockTransactionWebClient = MockTransactionWebClient();
+    when(mockTransactionWebClient.save(Transaction(null, 200, contact2), '1000'))
+        .thenAnswer((realInvocation) async => Transaction(null, 200, contact2));
 
     await tester.pumpWidget(BytebankApp(
       contactDao: mockContactDao,
       transactionWebClient: mockTransactionWebClient,
     ));
-
-    await tester.pumpWidget(BytebankApp(contactDao: mockContactDao));
 
     final dashboard = find.byType(Dashboard);
     expect(dashboard, findsOneWidget);
@@ -76,5 +82,29 @@ main() {
 
     final transactionAuthDialog = find.byType(TransactionAuthDialog);
     expect(transactionAuthDialog, findsOneWidget);
+
+    final textFieldPassword = find.byKey(TransactionAuthDialog.textFormFieldKey);
+    expect(textFieldPassword, findsOneWidget);
+    await tester.enterText(textFieldPassword, '1000');
+
+    final cancelButton = find.widgetWithText(FlatButton, 'Cancel');
+    expect(cancelButton, findsOneWidget);
+    final confirmeButton = find.widgetWithText(FlatButton, 'Confirm');
+    expect(confirmeButton, findsOneWidget);
+
+    await tester.tap(confirmeButton);
+    await tester.pumpAndSettle();
+
+    final successDialog = find.byType(SuccessDialog);
+    expect(successDialog, findsOneWidget);
+
+    final okButton = find.widgetWithText(FlatButton, 'Ok');
+    expect(okButton, findsOneWidget);
+
+    await tester.tap(okButton);
+    await tester.pumpAndSettle();
+
+    final contactsListBack = find.byType(ContactsList);
+    expect(contactsListBack, findsOneWidget);
   });
 }
