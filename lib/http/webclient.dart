@@ -8,9 +8,7 @@ final Client client = InterceptedClient.build(
   requestTimeout: Duration(seconds: 5),
 );
 
-
-
-Uri baseUrl = Uri.http('192.168.3.4:8080','transactions');
+Uri baseUrl = Uri.http('192.168.3.3:8080', 'transactions');
 
 //TODO: Altere para o seu Ip local
 /*
