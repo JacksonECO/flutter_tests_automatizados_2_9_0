@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/main.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/contacts_list.dart';
@@ -14,6 +17,13 @@ main() {
   testWidgets('Should transfer to contact', (tester) async {
     final MockContactDao mockContactDao = MockContactDao();
     when(mockContactDao.findAll()).thenAnswer((realInvocation) async => [Contact(0, 'Alex', 1000)]);
+
+    final MockTransactionWebClient mockTransactionWebClient = MockTransactionWebClient();
+
+    await tester.pumpWidget(BytebankApp(
+      contactDao: mockContactDao,
+      transactionWebClient: mockTransactionWebClient,
+    ));
 
     await tester.pumpWidget(BytebankApp(contactDao: mockContactDao));
 
@@ -46,5 +56,25 @@ main() {
 
     final transactionForm = find.byType(TransactionForm);
     expect(transactionForm, findsOneWidget);
+
+    final contactName = find.text('Alex');
+    expect(contactName, findsOneWidget);
+
+    final contactAccountNumber = find.text('1000');
+    expect(contactAccountNumber, findsOneWidget);
+
+    final textFieldValue = textFieldMatcher('Value');
+    expect(textFieldValue, findsOneWidget);
+
+    await tester.enterText(textFieldValue, '200');
+
+    final transferButton = find.widgetWithText(RaisedButton, 'Transfer');
+    expect(transferButton, findsOneWidget);
+
+    await tester.tap(transferButton);
+    await tester.pumpAndSettle();
+
+    final transactionAuthDialog = find.byType(TransactionAuthDialog);
+    expect(transactionAuthDialog, findsOneWidget);
   });
 }
