@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'matchers.dart';
-import 'mocks.dart';
+import '../helps/matchers.dart';
+import '../helps/mocks.dart';
 
 void main() {
   testWidgets('Should save a contact', (WidgetTester tester) async {
