@@ -10,3 +10,12 @@ Finder featureItemMatcher(String text, IconData icon) {
     return false;
   });
 }
+
+Finder textFieldMatcher(String labelText) {
+  return find.byWidgetPredicate((widget) {
+    if (widget is TextField) {
+      return widget.decoration.labelText == labelText;
+    }
+    return false;
+  });
+}
