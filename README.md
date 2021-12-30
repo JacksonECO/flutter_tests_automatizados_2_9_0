@@ -1,16 +1,6 @@
-# flutter_tests_automatizados_2_9_0
+# Testes no Flutter
 
-A new Flutter project.
+Este projeto foi criado durante a execução do curso de [Alex Felipe](https://github.com/alexfelipe) da plataforma [Alura](https://cursos.alura.com.br/course/testes-widgets-flutter) com o título: Testes de unidade e Widget com mocks: Boas práticas no Flutter.
 
-## Getting Started
+Para o projeto o instrutos disponibilizou o seguinte [GitHub](https://github.com/alura-cursos/flutter-tests/tree/initial-project) para futuros estudos.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
